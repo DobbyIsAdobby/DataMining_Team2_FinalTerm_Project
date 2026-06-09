@@ -1,0 +1,28 @@
+# 1. 핵심 데이터 연산 (Python 3.13 호환 최신버전)
+numpy==2.4.6
+pandas==3.0.3
+
+# 2. 머신러닝 및 모델링
+scikit-learn==1.8.0
+imbalanced-learn==0.14.2
+joblib==1.5.3
+
+# 3. 트리 기반 앙상블 모델 (Stacking용)
+xgboost==3.2.0
+lightgbm==4.6.0
+catboost==1.2.10
+
+# 4. 외부 API 데이터 수집 및 파싱
+yfinance==1.4.1
+pytrends==4.9.2
+requests==2.34.2
+pytz==2026.2
+lxml==6.1.1
+
+# 5. 시각화
+matplotlib==3.10.9
+seaborn==0.13.2
+
+# 6. 통신 우회 및 파싱
+curl_cffi==0.15.0
+beautifulsoup4==4.14.3

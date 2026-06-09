@@ -1,0 +1,19 @@
+# 가상환경 폴더
+venv/
+env/
+.env
+
+# 파이썬 캐시 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS 생성 파일
+.DS_Store
+
+# 데이터 파일
+data/*.csv
+
+# IDE 설정 파일
+.vscode/
+.idea/
