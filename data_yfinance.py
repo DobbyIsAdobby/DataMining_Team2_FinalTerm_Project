@@ -5,7 +5,7 @@ import os
 
 def collect_finance_data(company, ticker_symbol):
     # 1. 기간 설정: 최근 30일
-    # 7일 변동성(Volatility_7D) 계산 시 앞부분 NaN 발생을 막기 위해 넉넉히 40일 전부터 수집
+    # 7일 변동성(Volatility_7D) 계산 시 앞부분 NaN 발생을 막기 위해 40일 전부터 수집
     end_date = datetime.today()
     fetch_start_date = end_date - timedelta(days=40)
     target_start_date = end_date - timedelta(days=30)
@@ -19,17 +19,15 @@ def collect_finance_data(company, ticker_symbol):
     df = yf.download(ticker_symbol, start=start_str, end=end_str, progress=False)
     
     if df.empty:
-        print(f"[에러] {company}({ticker_symbol})의 데이터를 불러오지 못했습니다. 티커를 확인해주세요.")
+        print(f"에러 : {company}({ticker_symbol})의 데이터를 불러오지 못했습니다. Ticker를 확인해주세요.")
         return None
         
-    # 최신 yfinance 다중 인덱스 반환 방어 로직
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = df.columns.droplevel(1)
         
-    # 필요한 컬럼만 추출
     df = df[['Close', 'Volume']].copy()
     
-    # 3. 주말 제외 및 결측치 처리 (원본 코드 응용)
+    # 3. 주말 제외 및 결측치 처리
     # pd.bdate_range는 주말(토, 일)을 제외한 평일(Business Day)만 생성
     # 평일 중 공휴일로 인한 휴장일은 ffill()에 의해 전일 종가로 채움
     b_days = pd.bdate_range(start=fetch_start_date, end=end_date)
@@ -68,9 +66,9 @@ if __name__ == "__main__":
     print("==================================================")
     
     company_input = input("1. 게임사 이름 입력 (예: PearlAbyss): ").strip()
-    ticker_input = input("2. 주식 티커 입력 (예: 263750.KQ): ").strip()
+    ticker_input = input("2. 주식 Ticker 입력 (예: 263750.KQ): ").strip()
     
     if company_input and ticker_input:
         collect_finance_data(company_input, ticker_input)
     else:
-        print("이름과 티커를 모두 입력해야 합니다.")
+        print("이름과 Ticker를 모두 입력해야 합니다.")

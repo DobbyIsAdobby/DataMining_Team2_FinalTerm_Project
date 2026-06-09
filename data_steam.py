@@ -40,7 +40,7 @@ def get_integrated_target_dates(csv_path: str, launch_date_str: str, timezone_st
                 if target >= global_min_date:
                     target_dates_set.add(target.strftime('%Y-%m-%d'))
     else:
-        print(f"  [안내] {csv_path} 파일을 찾을 수 없어 론칭 데이터만 탐색합니다.")
+        print(f"  안내 : {csv_path} 파일을 찾을 수 없어 런칭 데이터만 탐색합니다.")
 
     return target_dates_set, global_min_date
 
@@ -107,7 +107,7 @@ def run_pipeline(app_id, timezone_str, launch_date, csv_path):
     local_tz = pytz.timezone(timezone_str)
     
     target_dates_set, global_min_date = get_integrated_target_dates(csv_path, launch_date, timezone_str)
-    print(f"  [Info] 최근 30일 내 패치/출시 관련 추출 대상 일자: {len(target_dates_set)}일")
+    print(f" 최근 30일 내 패치/출시 관련 추출 대상 일자: {len(target_dates_set)}일")
     
     # 추출 대상 날짜가 없으면 API 호출 생략
     if len(target_dates_set) == 0:
@@ -124,7 +124,7 @@ def run_pipeline(app_id, timezone_str, launch_date, csv_path):
 
 def process_and_save_reviews(reviews_data, app_id):
     if not reviews_data:
-        print(f"\n[결과] 최근 30일 내에 수집 조건(패치/출시)을 만족하는 데이터가 없습니다.")
+        print(f"\n결과 : 최근 30일 내에 수집 조건(패치/출시)을 만족하는 데이터가 없습니다.")
         return None
         
     df_reviews = pd.DataFrame(reviews_data)
@@ -142,7 +142,7 @@ def process_and_save_reviews(reviews_data, app_id):
     output_path = f'data/steam_sentiment_summary_{app_id}.csv'
     
     daily_summary.to_csv(output_path, index=False, encoding='utf-8-sig')
-    print(f"\n[완료] 파일 저장 성공 -> '{output_path}'")
+    print(f"\n완료 : 파일 저장 성공 -> '{output_path}'")
     return daily_summary
 
 if __name__ == "__main__":
