@@ -37,7 +37,7 @@ def load_patch_data(patch_file_path):
     return df_patch_grouped
 
 def apply_historical_pca(X_new):
-    hist_file = 'FinalData_Cleaned.csv'
+    hist_file = 'FinalData_Cleaned_Updated.csv'
     if not os.path.exists(hist_file):
         raise FileNotFoundError(f"에러 : PCA 기준을 잡기 위한 '{hist_file}' 파일이 필요합니다.")
         
